@@ -11,7 +11,14 @@
 
     echo quickStrrev( $str );
 
-    function quickStrrev ( $str )
+    echo '<br>';
+
+    echo recurrentStrrev( $str );
+    /**
+     * 二分法
+     *
+     */
+    function quickStrrev( $str )
     {
         $len = mb_strlen( $str );
 
@@ -27,7 +34,11 @@
         return $str;
     }
 
-    function diaosStrrev ( $str )
+    /**
+     * 循环法(效率比二分法低)
+     *
+     */
+    function diaosStrrev( $str )
     {
         $len    = mb_strlen( $str );
 
@@ -40,3 +51,24 @@
 
         return $newStr;
     }
+
+    /**
+     * 递归法(效率低)
+     *
+     */
+    function recurrentStrrev( $str )
+    {
+
+        //static 只会初始化一次
+        static $result = '';
+
+        if( strlen( $str ) > 0 )
+        {
+            recurrentStrrev( substr( $str , 1 ) );
+
+            $result .= substr( $str , 0 , 1 );
+        }
+
+        return $result;
+    }
+
